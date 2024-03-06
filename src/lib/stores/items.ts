@@ -9,15 +9,15 @@ const store = writable<Item[]>([
   createItem('Hoodie', true),
 ]);
 
-export const add = (title: string) => {
+export const add = (title: string): void => {
   store.update((items) => items.concat(createItem(title)));
 };
 
-export const remove = (id: number) => {
+export const remove = (id: number): void => {
   store.update((items) => items.filter((item) => item.id !== id));
 };
 
-export const toggle = (id: number) =>
+export const toggle = (id: number): void =>
   store.update((items) =>
     items.map((item) => {
       if (item.id !== id) return item;
@@ -25,11 +25,15 @@ export const toggle = (id: number) =>
     }),
   );
 
-export const markAllAsUnpacked = () => {
+export const markAllAsUnpacked = (): void => {
   store.update((items) => items.map((item) => ({ ...item, packed: false })));
 };
 
-export const removeAll = () => {
+export const markAllPacked = (): void => {
+  store.update((items) => items.map((item) => ({ ...item, packed: true })));
+};
+
+export const removeAll = (): void => {
   store.set([]);
 };
 

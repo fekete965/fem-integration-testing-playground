@@ -1,10 +1,18 @@
 <script lang="ts">
   import ItemList from '$lib/components/item-list.svelte';
-  import { packed, unpacked, filter, add, markAllAsUnpacked, removeAll } from '$lib/stores/items';
+  import {
+    packed,
+    unpacked,
+    filter,
+    add,
+    markAllAsUnpacked,
+    markAllPacked,
+    removeAll,
+  } from '$lib/stores/items';
 
   let newItemName = '';
 
-  const addItem = (event: Event) => {
+  const addItem = (_: Event) => {
     add(newItemName);
     newItemName = '';
   };
@@ -51,6 +59,9 @@
 <footer class="flex gap-2 w-full">
   <button data-testid="mark-all-as-unpacked" class="block" on:click={markAllAsUnpacked}
     >Mark All as Unpacked</button
+  >
+  <button data-testid="mark-all-as-packed" class="block" on:click={markAllPacked}
+    >Mark All as Packed</button
   >
   <button data-testid="remove-all" class="block" on:click={removeAll}>Remove All</button>
 </footer>
